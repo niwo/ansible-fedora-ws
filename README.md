@@ -1,4 +1,4 @@
-= Ansible Fedora Workstation Setup
+# Ansible Fedora Workstation Setup
 
 My personal, opinionated Fedora Workstation Setup using Ansible.
 This Playbook installs all my prefered software on a fresh Fedora Workstation with Gnome desktop.
