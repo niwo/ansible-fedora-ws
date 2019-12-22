@@ -1,0 +1,28 @@
+ 
+---
+- name: install dependencies
+  become: yes
+  package:
+    name:
+      - git
+      - ruby
+      - ruby-devel
+      - docker-compose
+      - "@development-tools"
+    state: present
+
+- name: install VS Code repo
+  become: yes
+  yum_repository:
+    name: code
+    description: Visual Studio Code repo
+    file: vscode
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+    gpgcheck: yes
+
+- name: install VS Code
+  become: yes
+  dnf:
+    name: "code-{{ visual_studio_code_version }}"
+    state: present

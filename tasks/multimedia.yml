@@ -1,0 +1,32 @@
+---
+
+  - name: install the rpmfusion repo packages
+    become: yes
+    package:
+      name:
+        - "http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_version }}.noarch.rpm"
+        - "http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_version  }}.noarch.rpm"
+      state: present
+
+  - name: install multimedia packages
+    become: yes
+    package:
+      name:
+        - gstreamer1-libav
+        - gstreamer1-plugins-bad-free
+        - gstreamer1-plugins-bad-free-extras
+        - gstreamer1-plugins-bad-freeworld
+        - gstreamer1-plugins-good
+        - gstreamer1-plugins-ugly
+        - gstreamer1-plugin-openh264
+        - chromium-libs-media-freeworld
+        - lame-libs
+        - mplayer
+        - vlc
+        - ffmpeg
+        - x264
+        - openh264
+        - mozilla-openh264
+        - faac
+        - intel-mediasdk
+      enablerepo: fedora-cisco-openh264

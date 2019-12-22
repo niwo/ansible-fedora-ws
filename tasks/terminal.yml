@@ -1,0 +1,26 @@
+---
+  - name: set minimize, maximize, close buttons on right
+    command: gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
+
+  - name: install ZSH
+    become: yes
+    package:
+      name: zsh
+      state: present
+
+  - name: install powerline-fonts
+    become: yes
+    package:
+      name: powerline-fonts
+      state: present
+
+  - name: install powerlevel9k
+    git:
+      repo: https://github.com/bhilburn/powerlevel9k.git
+      dest: ~/powerlevel9k
+
+  - name: enable powerlevel9k
+    lineinfile:
+      path: ~/.zshrc
+      line: source  ~/powerlevel9k/powerlevel9k.zsh-theme
+      create: yes

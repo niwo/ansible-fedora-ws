@@ -1,0 +1,42 @@
+---
+- hosts: fedora_workstation
+  become_method: sudo
+  
+  vars_files:
+    - vars/main.yml
+
+  roles:
+    - role: geerlingguy.docker
+      become: yes
+
+  pre_tasks:
+    - name: Update repositories
+      dnf:
+        update_cache: yes
+      become: yes
+      changed_when: False
+    
+  tasks:
+
+    - name: Install required packages
+      become: yes
+      package:
+        name: "{{ item }}"
+        state: present
+      loop: "{{  packages_required  }}"
+
+    - name: Remove unwanted packages
+      become: yes
+      package:
+        name: "{{ item }}"
+        state: absent
+      loop: "{{  packages_unwanted  }}"
+
+    - include: tasks/devtools.yml
+      tags: devtools
+    - include: tasks/gnome.yml
+      tags: gnome
+    - include: tasks/terminal.yml
+      tags: terminal
+    - include: tasks/multimedia.yml
+      tags: multimedia

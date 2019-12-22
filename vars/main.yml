@@ -1,0 +1,9 @@
+---
+packages_required:
+  - htop
+  - chromium
+
+packages_unwanted:
+  - rhythmbox
+
+visual_studio_code_version:  1.41.1

@@ -1,0 +1,47 @@
+---
+  - name: set minimize, maximize, close buttons on right
+    command: gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
+
+  - name: install gnome-tweaks
+    become: yes
+    package:
+      name: gnome-tweaks
+      state: present
+ 
+  - name: install psutil
+    pip:
+      name: psutil
+      state: present
+      extra_args: --user
+
+  - name: install theme
+    become: yes
+    package:
+      name: arc-theme
+      state: present
+
+  - name: install icon theme
+    become: yes
+    package:
+      name: papirus-icon-theme
+      state: present
+
+  - name: set GTK theme
+    dconf:
+      key: "/org/gnome/desktop/interface/gtk-theme"
+      value: "'Arc-Darker-solid'"
+
+  - name: set icon theme
+    dconf:
+      key: "/org/gnome/desktop/interface/icon-theme"
+      value: "'Papirus'"
+
+  - name: configure available keyboard layouts
+    dconf:
+      key: "/org/gnome/desktop/input-sources/sources"
+      value: "[('xkb', 'ch+de_mac'), ('xkb', 'ch'), ('xkb', 'us')]"
+
+  - name: enable night mode
+    dconf:
+      key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
+      value: "'true'"
