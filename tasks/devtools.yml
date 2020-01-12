@@ -7,8 +7,23 @@
       - git
       - ruby
       - ruby-devel
-      - docker-compose
+      - podman
+      - podman-compose
       - "@development-tools"
+      - curl
+      - file
+      - zlib-devel
+      - libxcrypt-compat
+      - gmp-devel
+      - libbsd-devel
+      - libedit-devel
+      - libevent-devel
+      - libxml2-devel
+      - libyaml-devel
+      - llvm-static
+      - openssl-devel
+      - redhat-rpm-config
+      - llvm
     state: present
 
 - name: install VS Code repo
@@ -26,3 +41,31 @@
   dnf:
     name: "code-{{ visual_studio_code_version }}"
     state: present
+
+- name: install bundler gem
+  become: yes
+  gem:
+    name: bundler
+    state: present
+
+- name: install snapd
+  become: yes
+  dnf:
+    name: snapd
+    state: present
+  
+- name: enable snapd classic environment
+  become: yes
+  file:
+    src: /var/lib/snapd/snap
+    dest: /snap
+    owner: root
+    group: root
+    state: link
+
+- name: Install crystal from snap
+  become: yes
+  snap:
+    name: crystal
+    classic: yes
+

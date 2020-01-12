@@ -2,10 +2,12 @@
   - name: set minimize, maximize, close buttons on right
     command: gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
 
-  - name: install ZSH
+  - name: install additional packages
     become: yes
     package:
-      name: zsh
+      name:
+        - zsh
+        - vim-enhanced
       state: present
 
   - name: install powerline-fonts
@@ -24,3 +26,11 @@
       path: ~/.zshrc
       line: source  ~/powerlevel9k/powerlevel9k.zsh-theme
       create: yes
+
+  - name: configure zsh history tuning
+    blockinfile:
+      path: ~/.zshrc
+      block: |
+        export HISTFILE=~/.zsh_history
+        export HISTSIZE=1000000
+        export SAVEHIST=$HISTSIZE

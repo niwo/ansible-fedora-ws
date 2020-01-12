@@ -2,7 +2,7 @@
 packages_required:
   - htop
   - chromium
-
+  
 packages_unwanted:
   - rhythmbox
 
