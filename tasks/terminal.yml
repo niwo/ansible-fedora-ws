@@ -1,4 +1,5 @@
 ---
+
   - name: set minimize, maximize, close buttons on right
     command: gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
 

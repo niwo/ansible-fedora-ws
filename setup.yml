@@ -36,3 +36,5 @@
       tags: terminal
     - include: tasks/multimedia.yml
       tags: multimedia
+    - include: tasks/chrome.yml
+      tags: chrome

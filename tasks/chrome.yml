@@ -1,0 +1,13 @@
+---
+
+- name: enable chrome
+  become: yes
+  shell: dnf config-manager --set-enabled google-chrome
+  args:
+    warn: no
+
+- name: install chrome stable
+  become: yes
+  package:
+    name: google-chrome-stable
+    state: present

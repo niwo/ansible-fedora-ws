@@ -1,5 +1,5 @@
- 
 ---
+
 - name: install dependencies
   become: yes
   package:
@@ -38,7 +38,7 @@
 
 - name: install VS Code
   become: yes
-  dnf:
+  package:
     name: "code-{{ visual_studio_code_version }}"
     state: present
 
@@ -50,10 +50,10 @@
 
 - name: install snapd
   become: yes
-  dnf:
+  package:
     name: snapd
     state: present
-  
+
 - name: enable snapd classic environment
   become: yes
   file:
